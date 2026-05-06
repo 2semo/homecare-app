@@ -18,9 +18,14 @@ export default function HomeScreen() {
   const [activeCategory, setActiveCategory] = useState<CategoryFilter>('all');
   const [modalVisible, setModalVisible] = useState(false);
 
-  const filtered = activeCategory === 'all'
-    ? SERVICES
-    : SERVICES.filter((s) => s.category === activeCategory);
+  const filtered = (() => {
+    if (activeCategory !== 'all') {
+      return SERVICES.filter((s) => s.category === activeCategory);
+    }
+    const popularIds = new Set(POPULAR_SERVICES.map((s) => s.id));
+    const rest = SERVICES.filter((s) => !popularIds.has(s.id));
+    return [...POPULAR_SERVICES, ...rest];
+  })();
 
   const handleServicePress = useCallback((service: Service) => {
     router.push(`/service/${service.id}`);
