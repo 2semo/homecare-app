@@ -1,7 +1,7 @@
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useCallback, useState } from 'react';
-import { ScrollView, StatusBar, StyleSheet, Text, View } from 'react-native';
+import { Linking, Pressable, ScrollView, StatusBar, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import CallButton from '@/components/CallButton';
 import ConfirmModal from '@/components/ConfirmModal';
@@ -29,6 +29,11 @@ const CATEGORY_GUARANTEE: Record<Category, { icon: string; title: string; desc: 
     icon: 'shield-check',
     title: '이사 가전 수리비 1년 보증',
     desc: '이전설치 완료 후 1년간 고장수리비 보장보험 100% 제공',
+  },
+  '윈도우ALL케어': {
+    icon: 'window-check',
+    title: '시공 품질 14일 무상 재시공',
+    desc: '시공 후 14일 이내 품질 불량 시 무상 재시공 100% 보장',
   },
 };
 
@@ -62,6 +67,12 @@ export default function ServiceDetailScreen() {
     setModalVisible(false);
     if (service) {
       await makeCall(service.phone);
+    }
+  }, [service]);
+
+  const handleQuotation = useCallback(() => {
+    if (service?.quotationUrl) {
+      Linking.openURL(service.quotationUrl);
     }
   }, [service]);
 
@@ -140,6 +151,23 @@ export default function ServiceDetailScreen() {
             )}
           </View>
         </View>
+
+        {/* 상세 견적 */}
+        {service.quotationUrl && (
+          <View style={styles.section}>
+            <Pressable
+              style={({ pressed }) => [styles.quotationBtn, pressed && styles.quotationBtnPressed]}
+              onPress={handleQuotation}
+              accessibilityLabel="상세 견적 확인하기"
+              accessibilityRole="link"
+            >
+              <MaterialCommunityIcons name="calculator-variant-outline" size={20} color="#FFFFFF" />
+              <Text style={styles.quotationBtnText}>상세 견적 확인하기</Text>
+              <MaterialCommunityIcons name="open-in-new" size={16} color="rgba(255,255,255,0.75)" />
+            </Pressable>
+            <Text style={styles.quotationNote}>정확한 견적은 위 링크에서 확인하세요</Text>
+          </View>
+        )}
 
         {/* 안심 보증 혜택 — 카테고리별 대표 보증 */}
         <View style={styles.guaranteeSection}>
@@ -401,6 +429,31 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingBottom: 16,
     paddingTop: 8,
+  },
+  quotationBtn: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: Colors.primary,
+    borderRadius: 10,
+    paddingVertical: 14,
+    gap: 8,
+  },
+  quotationBtnPressed: {
+    opacity: 0.85,
+  },
+  quotationBtnText: {
+    flex: 1,
+    fontSize: 15,
+    fontWeight: '700',
+    color: '#FFFFFF',
+    textAlign: 'center',
+  },
+  quotationNote: {
+    fontSize: 12,
+    color: Colors.textDisabled,
+    textAlign: 'center',
+    marginTop: 8,
   },
   reasonText: {
     fontSize: 14,

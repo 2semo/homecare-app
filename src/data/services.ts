@@ -11,9 +11,9 @@ export const SERVICES: Service[] = [
   // ─────────────────────────────────────────
   {
     id: 'aircon-wall',
-    name: '에어컨 클리닝 (벽걸이·창문형)',
+    name: '에어컨 클리닝 (벽걸이형)',
     category: '가전클리닝',
-    keywords: ['에어컨', '냉방기', '에어콘', '벽걸이', '창문형', 'PAC'],
+    keywords: ['에어컨', '냉방기', '에어콘', '벽걸이', 'PAC'],
     ...PRICES['aircon-wall'],
     duration: '약 1시간',
     phone: PHONE,
@@ -561,6 +561,32 @@ export const SERVICES: Service[] = [
     iconName: 'home-outline',
   },
 
+  {
+    id: 'noise-mat',
+    name: '층간소음방지매트 시공',
+    category: '홈클리닝',
+    keywords: ['층간소음', '소음방지', '매트', '소음', '층간', '방음'],
+    ...PRICES['noise-mat'],
+    duration: '별도 협의',
+    phone: PHONE,
+    quotationUrl: 'https://noise-mat.netlify.app/',
+    highlights: [
+      '층간소음 저감 전문 매트 맞춤 시공',
+      '거실·침실·아이방 등 공간별 최적 설계',
+      '추가요금 Zero 보증 — 사전 미고지 추가요금 100% 환급',
+      'CS마스터 전문가 방문 — 시간 약속 100% 이행',
+    ],
+    process: [
+      { step: 1, label: '온라인 견적', desc: '링크에서 면적과 환경을 입력해 견적을 확인합니다' },
+      { step: 2, label: '상담 예약', desc: '견적 확정 후 방문 일시를 안내드립니다' },
+      { step: 3, label: '전문가 시공', desc: 'CS마스터가 층간소음방지매트를 정밀 시공합니다' },
+      { step: 4, label: '완료 확인', desc: '시공 상태를 함께 확인 후 완료합니다' },
+    ],
+    reason:
+      '아파트·빌라 층간소음은 이웃 분쟁의 주요 원인입니다. 전문 소음방지매트 시공으로 생활 소음을 줄이고 이웃과의 갈등을 예방하세요.',
+    iconName: 'layers',
+  },
+
   // ─────────────────────────────────────────
   // 이전·설치
   // ─────────────────────────────────────────
@@ -687,7 +713,8 @@ export const SERVICES: Service[] = [
   {
     id: 'safety-screen',
     name: '안전방충망',
-    category: '이전설치',
+    category: '윈도우ALL케어',
+    quotationUrl: 'https://kobang.netlify.app/',
     keywords: ['방충망', '안전방충망', '방충', '창문', '모기망'],
     ...PRICES['safety-screen'],
     duration: '창문당 약 10~20분',
@@ -711,7 +738,8 @@ export const SERVICES: Service[] = [
   {
     id: 'blacksten-screen',
     name: '블랙스텐 미세촘촘 방충망 교체',
-    category: '이전설치',
+    category: '윈도우ALL케어',
+    quotationUrl: 'https://kobang.netlify.app/',
     keywords: ['블랙스텐', '방충망', '미세방충망', '촘촘', '먼지차단', '창문'],
     ...PRICES['blacksten-screen'],
     duration: '창문당 약 20~30분',
@@ -735,7 +763,8 @@ export const SERVICES: Service[] = [
   {
     id: 'glass-railing',
     name: '유리난간 설치',
-    category: '이전설치',
+    category: '윈도우ALL케어',
+    quotationUrl: 'https://kobang.netlify.app/',
     keywords: ['유리난간', '난간', '발코니', '베란다', '유리', '인테리어'],
     ...PRICES['glass-railing'],
     duration: '별도 협의',
@@ -759,7 +788,8 @@ export const SERVICES: Service[] = [
   {
     id: 'heat-film',
     name: '후퍼옵틱 열차단 필름 시공',
-    category: '이전설치',
+    category: '윈도우ALL케어',
+    quotationUrl: 'https://kobang.netlify.app/',
     keywords: ['열차단필름', '필름', '창문필름', '후퍼옵틱', '단열', '자외선차단'],
     ...PRICES['heat-film'],
     duration: '별도 협의',
