@@ -18,12 +18,12 @@ export default function CallButton({ onPress, disabled = false, serviceName }: P
       ]}
       onPress={disabled ? undefined : onPress}
       disabled={disabled}
-      accessibilityLabel={`${serviceName} 신청하기, 전화 연결`}
+      accessibilityLabel={`${serviceName} 문의하기, 전화 연결`}
       accessibilityRole="button"
     >
       <View style={styles.inner}>
         <MaterialCommunityIcons name="phone" size={20} color="#FFFFFF" style={styles.icon} />
-        <Text style={styles.text}>신청하기</Text>
+        <Text style={styles.text}>문의하기</Text>
       </View>
     </Pressable>
   );

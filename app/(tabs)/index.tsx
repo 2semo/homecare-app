@@ -1,18 +1,27 @@
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { useCallback, useState } from 'react';
 import { FlatList, Platform, Pressable, ScrollView, StatusBar, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import CategoryTab from '@/components/CategoryTab';
+import ConfirmModal from '@/components/ConfirmModal';
 import ServiceCard from '@/components/ServiceCard';
 import ServiceCardHorizontal from '@/components/ServiceCardHorizontal';
 import { Colors } from '@/constants/colors';
-import { POPULAR_SERVICES, SERVICES } from '@/data/services';
+import { PHONE, POPULAR_SERVICES, SERVICES } from '@/data/services';
+import { makeCall } from '@/lib/phone';
 import type { CategoryFilter, Service } from '@/types/service';
 
 export default function HomeScreen() {
   const router = useRouter();
   const insets = useSafeAreaInsets();
   const [activeCategory, setActiveCategory] = useState<CategoryFilter>('all');
+  const [modalVisible, setModalVisible] = useState(false);
+
+  const handleCallConfirm = useCallback(async () => {
+    setModalVisible(false);
+    await makeCall(PHONE);
+  }, []);
 
   const filtered = activeCategory === 'all'
     ? SERVICES
@@ -30,8 +39,21 @@ export default function HomeScreen() {
     <View>
       {/* 헤더 */}
       <View style={[styles.header, { paddingTop: insets.top + 16 }]}>
-        <Text style={styles.headerTitle}>홈케어 서비스</Text>
-        <Text style={styles.headerSub}>롯데하이마트 안산선부</Text>
+        <View style={styles.headerRow}>
+          <View>
+            <Text style={styles.headerTitle}>홈케어 서비스</Text>
+            <Text style={styles.headerSub}>롯데하이마트 안산선부</Text>
+          </View>
+          <Pressable
+            style={({ pressed }) => [styles.callBtn, pressed && styles.callBtnPressed]}
+            onPress={() => setModalVisible(true)}
+            accessibilityLabel="전화 문의하기"
+            accessibilityRole="button"
+          >
+            <MaterialCommunityIcons name="phone" size={18} color="#FFFFFF" />
+            <Text style={styles.callBtnText}>문의하기</Text>
+          </Pressable>
+        </View>
       </View>
 
       {/* 인기 서비스 */}
@@ -74,6 +96,12 @@ export default function HomeScreen() {
         showsVerticalScrollIndicator={false}
         keyboardShouldPersistTaps="handled"
       />
+      <ConfirmModal
+        visible={modalVisible}
+        serviceName="롯데하이마트 안산선부"
+        onConfirm={handleCallConfirm}
+        onCancel={() => setModalVisible(false)}
+      />
     </View>
   );
 }
@@ -89,6 +117,28 @@ const styles = StyleSheet.create({
     paddingBottom: 16,
     borderBottomWidth: 1,
     borderBottomColor: Colors.border,
+  },
+  headerRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  callBtn: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: Colors.primary,
+    borderRadius: 20,
+    paddingHorizontal: 14,
+    paddingVertical: 8,
+    gap: 6,
+  },
+  callBtnPressed: {
+    opacity: 0.85,
+  },
+  callBtnText: {
+    fontSize: 14,
+    fontWeight: '600',
+    color: '#FFFFFF',
   },
   headerTitle: {
     fontSize: 22,

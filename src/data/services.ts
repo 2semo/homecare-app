@@ -3,7 +3,7 @@ import { PRICES } from './prices';
 
 // 개발사: 롯데하이마트 안산선부 | 연락처: 031-483-7400
 // 가격은 src/data/prices.ts 에서 관리 — 매월 prices.ts 만 수정하면 됩니다
-const PHONE = '0314837400';
+export const PHONE = '0314837400';
 
 export const SERVICES: Service[] = [
   // ─────────────────────────────────────────

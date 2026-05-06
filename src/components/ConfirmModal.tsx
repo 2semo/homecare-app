@@ -27,7 +27,7 @@ export default function ConfirmModal({
           <MaterialCommunityIcons name="phone" size={40} color={Colors.primary} />
 
           <Text style={styles.name}>{serviceName}</Text>
-          <Text style={styles.guide}>신청 전화를 연결할까요?</Text>
+          <Text style={styles.guide}>문의 전화를 연결할까요?</Text>
 
           <View style={styles.buttons}>
             <Pressable
