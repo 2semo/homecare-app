@@ -1,12 +1,11 @@
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { useCallback, useState } from 'react';
-import { FlatList, Pressable, ScrollView, StatusBar, StyleSheet, Text, View } from 'react-native';
+import { FlatList, Pressable, StatusBar, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import CategoryTab from '@/components/CategoryTab';
 import ConfirmModal from '@/components/ConfirmModal';
 import ServiceCard from '@/components/ServiceCard';
-import ServiceCardHorizontal from '@/components/ServiceCardHorizontal';
 import { Colors } from '@/constants/colors';
 import { PHONE, POPULAR_SERVICES, SERVICES } from '@/data/services';
 import { makeCall } from '@/lib/phone';
@@ -101,24 +100,6 @@ export default function HomeScreen() {
           <Text style={styles.statNum}>당일</Text>
           <Text style={styles.statLabel}>견적 회신</Text>
         </View>
-      </View>
-
-      {/* ── 인기 서비스 ── */}
-      <View style={styles.popularSection}>
-        <Text style={styles.popularTitle}>인기 서비스</Text>
-        <ScrollView
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          contentContainerStyle={styles.popularList}
-        >
-          {POPULAR_SERVICES.map((service) => (
-            <ServiceCardHorizontal
-              key={service.id}
-              service={service}
-              onPress={() => handleServicePress(service)}
-            />
-          ))}
-        </ScrollView>
       </View>
 
       {/* ── 전체 서비스 섹션 헤더 ── */}
@@ -305,28 +286,6 @@ const styles = StyleSheet.create({
     width: 1,
     backgroundColor: Colors.dividerSoft,
     marginVertical: 4,
-  },
-
-  // ── 인기 서비스
-  popularSection: {
-    backgroundColor: Colors.cardBg,
-    paddingTop: 28,
-    paddingBottom: 24,
-    marginTop: 8,
-    borderBottomWidth: 1,
-    borderBottomColor: Colors.dividerSoft,
-  },
-  popularTitle: {
-    fontSize: 18,
-    fontWeight: '700',
-    color: Colors.textPrimary,
-    letterSpacing: -0.5,
-    paddingHorizontal: 20,
-    marginBottom: 14,
-  },
-  popularList: {
-    paddingHorizontal: 20,
-    gap: 10,
   },
 
   // ── 전체 서비스 섹션 헤더
