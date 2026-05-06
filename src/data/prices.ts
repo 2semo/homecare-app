@@ -68,10 +68,6 @@ export const PRICES: Record<string, PriceInfo> = {
     price: '88,000원~',
     priceNote: '제품 사양에 따라 상이',
   },
-  'massage-chair': {
-    price: '163,000원~',
-    priceNote: '제품 크기·사양에 따라 상이',
-  },
   'range': {
     price: '88,000원~',
     priceNote: '제품 사양에 따라 상이',

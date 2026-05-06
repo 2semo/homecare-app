@@ -314,31 +314,6 @@ export const SERVICES: Service[] = [
     iconName: 'hanger',
   },
   {
-    id: 'massage-chair',
-    name: '안마의자 클리닝',
-    category: '가전클리닝',
-    keywords: ['안마의자', '마사지', '안마기', '마사지체어'],
-    ...PRICES['massage-chair'],
-    duration: '약 1시간',
-    phone: PHONE,
-    warranty: '서비스 후 1년 가전 수리 보증',
-    highlights: [
-      '패브릭·가죽 표면 전문 살균 클리닝',
-      '내부 기계부 먼지·이물질 제거',
-      'CS마스터 전문가 방문 — 시간 약속 100% 이행',
-      '완료 후 1년간 고장수리비 보장보험 제공',
-    ],
-    process: [
-      { step: 1, label: '예약 확인', desc: '방문 일시를 안내드립니다' },
-      { step: 2, label: '전문가 방문', desc: 'CS마스터가 방문합니다' },
-      { step: 3, label: '표면·내부 클리닝', desc: '표면 살균 후 내부 기계부 먼지를 제거합니다' },
-      { step: 4, label: '완료 확인', desc: '작동 테스트 후 완료를 확인합니다' },
-    ],
-    reason:
-      '자주 접촉하는 안마의자 표면에는 땀·피지·세균이 쌓입니다. 정기 클리닝으로 위생적인 사용 환경을 만드세요.',
-    iconName: 'seat-recline-extra',
-  },
-  {
     id: 'range',
     name: '전기레인지·인덕션 클리닝',
     category: '가전클리닝',
@@ -394,7 +369,7 @@ export const SERVICES: Service[] = [
   // ─────────────────────────────────────────
   {
     id: 'move-in-clean',
-    name: '클리토피아 입주청소',
+    name: '크린토피아 입주청소',
     category: '홈클리닝',
     keywords: ['입주청소', '입주', '이사청소', '새집', '청소', '클리토피아'],
     ...PRICES['move-in-clean'],
