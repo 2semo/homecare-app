@@ -24,4 +24,9 @@ export const Colors = {
   // 탭 바
   tabActive: '#0064D2',
   tabInactive: '#AAAAAA',
+
+  // 보증 (안심케어)
+  guarantee: '#1A8A3C',
+  guaranteeBg: '#F0FAF4',
+  guaranteeBorder: '#B8E5C8',
 } as const;

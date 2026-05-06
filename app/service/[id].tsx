@@ -10,8 +10,45 @@ import ProcessStepList from '@/components/ProcessStep';
 import { Colors } from '@/constants/colors';
 import { getServiceById } from '@/data/services';
 import { makeCall } from '@/lib/phone';
+import type { Category } from '@/types/service';
 
 const CTA_HEIGHT = 72;
+
+const CATEGORY_GUARANTEE: Record<Category, { icon: string; title: string; desc: string }> = {
+  '가전클리닝': {
+    icon: 'shield-check',
+    title: '가전 수리비 1년 무상 보증',
+    desc: '클리닝 완료 후 1년간 고장수리비 보장보험 100% 제공',
+  },
+  '홈클리닝': {
+    icon: 'currency-usd-off',
+    title: '추가요금 Zero 보증',
+    desc: '사전 미고지 추가요금 발생 시 100% 환급 + 2만 L.Point 지급',
+  },
+  '이전설치': {
+    icon: 'shield-check',
+    title: '이사 가전 수리비 1년 보증',
+    desc: '이전설치 완료 후 1년간 고장수리비 보장보험 100% 제공',
+  },
+};
+
+const COMMON_GUARANTEES = [
+  {
+    icon: 'clock-check-outline',
+    title: '시간약속 100% 이행',
+    desc: '방문 일자·시공시간 미준수 시 2만 L.Point 즉시 지급',
+  },
+  {
+    icon: 'wrench-check',
+    title: 'AS 90일 무상 재수리',
+    desc: 'AS 완료 후 90일 이내 동일 증상 발생 시 무상 재수리 + 2만 L.Point',
+  },
+  {
+    icon: 'refresh-circle',
+    title: '품질 불량 14일 무상 재시공',
+    desc: '서비스 후 14일 이내 품질 불량 시 무상 재시공 100%',
+  },
+];
 
 export default function ServiceDetailScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
@@ -43,6 +80,7 @@ export default function ServiceDetailScreen() {
   }
 
   const ctaBottom = insets.bottom + 16;
+  const categoryGuarantee = CATEGORY_GUARANTEE[service.category];
 
   return (
     <View style={styles.container}>
@@ -103,6 +141,42 @@ export default function ServiceDetailScreen() {
           </View>
         </View>
 
+        {/* 안심 보증 혜택 — 카테고리별 대표 보증 */}
+        <View style={styles.guaranteeSection}>
+          <View style={styles.guaranteeHeader}>
+            <MaterialCommunityIcons name="shield-star" size={18} color="#FFFFFF" />
+            <Text style={styles.guaranteeHeaderText}>하이마트 안심케어 100% 보증제</Text>
+          </View>
+
+          {/* 카테고리별 핵심 보증 */}
+          <View style={styles.guaranteeMainCard}>
+            <MaterialCommunityIcons
+              name={categoryGuarantee.icon as any}
+              size={24}
+              color={Colors.guarantee}
+            />
+            <View style={styles.guaranteeMainInfo}>
+              <Text style={styles.guaranteeMainTitle}>{categoryGuarantee.title}</Text>
+              <Text style={styles.guaranteeMainDesc}>{categoryGuarantee.desc}</Text>
+            </View>
+          </View>
+
+          {/* 공통 보증 */}
+          {COMMON_GUARANTEES.map((g, i) => (
+            <View key={i} style={styles.guaranteeRow}>
+              <MaterialCommunityIcons name={g.icon as any} size={18} color={Colors.guarantee} />
+              <View style={styles.guaranteeInfo}>
+                <Text style={styles.guaranteeTitle}>{g.title}</Text>
+                <Text style={styles.guaranteeDesc}>{g.desc}</Text>
+              </View>
+            </View>
+          ))}
+
+          <Text style={styles.guaranteeNote}>
+            ※ 방문 미준수 시 2만 L.Point는 L.POINT 통합회원가입 필수
+          </Text>
+        </View>
+
         {/* 이런 분께 추천 */}
         <View style={styles.section}>
           <SectionTitle title="이런 분께 추천해요" />
@@ -125,14 +199,6 @@ export default function ServiceDetailScreen() {
           <SectionTitle title="진행 방식" />
           <ProcessStepList steps={service.process} />
         </View>
-
-        {/* 보증 */}
-        {service.warranty && (
-          <View style={styles.warrantyBox}>
-            <MaterialCommunityIcons name="shield-check" size={18} color={Colors.primary} />
-            <Text style={styles.warrantyText}>{service.warranty}</Text>
-          </View>
-        )}
       </ScrollView>
 
       {/* 고정 CTA */}
@@ -259,6 +325,83 @@ const styles = StyleSheet.create({
     color: Colors.textSecondary,
     marginTop: 6,
   },
+  // 보증 섹션
+  guaranteeSection: {
+    backgroundColor: Colors.cardBg,
+    marginBottom: 8,
+    overflow: 'hidden',
+  },
+  guaranteeHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: Colors.guarantee,
+    paddingHorizontal: 20,
+    paddingVertical: 12,
+    gap: 8,
+  },
+  guaranteeHeaderText: {
+    fontSize: 14,
+    fontWeight: '700',
+    color: '#FFFFFF',
+  },
+  guaranteeMainCard: {
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    backgroundColor: Colors.guaranteeBg,
+    marginHorizontal: 16,
+    marginTop: 16,
+    marginBottom: 4,
+    borderRadius: 10,
+    padding: 14,
+    gap: 12,
+    borderWidth: 1,
+    borderColor: Colors.guaranteeBorder,
+  },
+  guaranteeMainInfo: {
+    flex: 1,
+  },
+  guaranteeMainTitle: {
+    fontSize: 14,
+    fontWeight: '700',
+    color: Colors.guarantee,
+    marginBottom: 4,
+  },
+  guaranteeMainDesc: {
+    fontSize: 12,
+    color: Colors.textBody,
+    lineHeight: 18,
+  },
+  guaranteeRow: {
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    paddingHorizontal: 16,
+    paddingVertical: 10,
+    gap: 12,
+    borderTopWidth: 1,
+    borderTopColor: Colors.border,
+    marginTop: 4,
+  },
+  guaranteeInfo: {
+    flex: 1,
+  },
+  guaranteeTitle: {
+    fontSize: 13,
+    fontWeight: '600',
+    color: Colors.textPrimary,
+    marginBottom: 2,
+  },
+  guaranteeDesc: {
+    fontSize: 12,
+    color: Colors.textSecondary,
+    lineHeight: 18,
+  },
+  guaranteeNote: {
+    fontSize: 11,
+    color: Colors.textDisabled,
+    paddingHorizontal: 16,
+    paddingBottom: 16,
+    paddingTop: 8,
+  },
   reasonText: {
     fontSize: 14,
     color: Colors.textBody,
@@ -275,20 +418,6 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: Colors.textBody,
     lineHeight: 20,
-  },
-  warrantyBox: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: Colors.cardBg,
-    paddingHorizontal: 20,
-    paddingVertical: 16,
-    marginBottom: 8,
-    gap: 10,
-  },
-  warrantyText: {
-    fontSize: 14,
-    color: Colors.textSecondary,
-    flex: 1,
   },
   ctaContainer: {
     position: 'absolute',
