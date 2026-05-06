@@ -19,7 +19,7 @@ export default function ServiceCardHorizontal({ service, onPress }: Props) {
       <View style={styles.iconBox}>
         <MaterialCommunityIcons
           name={service.iconName as any}
-          size={22}
+          size={20}
           color={Colors.primary}
         />
       </View>
@@ -33,41 +33,41 @@ export default function ServiceCardHorizontal({ service, onPress }: Props) {
 
 const styles = StyleSheet.create({
   card: {
-    width: 160,
-    backgroundColor: Colors.cardBg,
-    borderRadius: 12,
-    borderWidth: 1,
-    borderColor: Colors.border,
+    width: 148,
+    backgroundColor: Colors.sectionBg,
+    borderRadius: 18,
     padding: 14,
-    marginRight: 12,
+  },
+  pressed: {
+    opacity: 0.75,
+    transform: [{ scale: 0.97 }],
+  },
+  iconBox: {
+    width: 38,
+    height: 38,
+    borderRadius: 10,
+    backgroundColor: '#FFFFFF',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 24,
     shadowColor: '#000',
-    shadowOpacity: 0.05,
-    shadowRadius: 4,
+    shadowOpacity: 0.04,
+    shadowRadius: 2,
     shadowOffset: { width: 0, height: 1 },
     elevation: 1,
   },
-  pressed: {
-    opacity: 0.7,
-  },
-  iconBox: {
-    width: 36,
-    height: 36,
-    borderRadius: 8,
-    backgroundColor: Colors.primaryBadgeBg,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginBottom: 10,
-  },
   name: {
-    fontSize: 14,
+    fontSize: 13,
     fontWeight: '600',
     color: Colors.textPrimary,
-    marginBottom: 6,
-    lineHeight: 20,
+    letterSpacing: -0.4,
+    marginBottom: 4,
+    lineHeight: 18,
   },
   price: {
-    fontSize: 13,
-    fontWeight: '700',
+    fontSize: 12,
+    fontWeight: '600',
     color: Colors.primary,
+    letterSpacing: -0.2,
   },
 });

@@ -1,13 +1,14 @@
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { useCallback, useState } from 'react';
-import { FlatList, Pressable, StatusBar, StyleSheet, Text, View } from 'react-native';
+import { FlatList, Pressable, ScrollView, StatusBar, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import CategoryTab from '@/components/CategoryTab';
 import ConfirmModal from '@/components/ConfirmModal';
 import ServiceCard from '@/components/ServiceCard';
+import ServiceCardHorizontal from '@/components/ServiceCardHorizontal';
 import { Colors } from '@/constants/colors';
-import { PHONE, SERVICES } from '@/data/services';
+import { PHONE, POPULAR_SERVICES, SERVICES } from '@/data/services';
 import { makeCall } from '@/lib/phone';
 import type { CategoryFilter, Service } from '@/types/service';
 
@@ -97,10 +98,28 @@ export default function HomeScreen() {
         </View>
       </View>
 
-      {/* ── 서비스 섹션 헤더 ── */}
+      {/* ── 인기 서비스 ── */}
+      <View style={styles.popularSection}>
+        <Text style={styles.popularTitle}>인기 서비스</Text>
+        <ScrollView
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={styles.popularList}
+        >
+          {POPULAR_SERVICES.map((service) => (
+            <ServiceCardHorizontal
+              key={service.id}
+              service={service}
+              onPress={() => handleServicePress(service)}
+            />
+          ))}
+        </ScrollView>
+      </View>
+
+      {/* ── 전체 서비스 섹션 헤더 ── */}
       <View style={styles.sectionHead}>
         <Text style={styles.sectionEyebrow}>SERVICES</Text>
-        <Text style={styles.sectionTitle}>필요한 모든 홈케어</Text>
+        <Text style={styles.sectionTitle}>전체 서비스</Text>
         <Text style={styles.sectionSub}>직영 기사가 직접 방문해 깨끗하게 마무리합니다.</Text>
       </View>
 
@@ -283,7 +302,29 @@ const styles = StyleSheet.create({
     marginVertical: 4,
   },
 
-  // ── 서비스 섹션 헤더
+  // ── 인기 서비스
+  popularSection: {
+    backgroundColor: Colors.cardBg,
+    paddingTop: 28,
+    paddingBottom: 24,
+    marginTop: 8,
+    borderBottomWidth: 1,
+    borderBottomColor: Colors.dividerSoft,
+  },
+  popularTitle: {
+    fontSize: 18,
+    fontWeight: '700',
+    color: Colors.textPrimary,
+    letterSpacing: -0.5,
+    paddingHorizontal: 20,
+    marginBottom: 14,
+  },
+  popularList: {
+    paddingHorizontal: 20,
+    gap: 10,
+  },
+
+  // ── 전체 서비스 섹션 헤더
   sectionHead: {
     backgroundColor: Colors.cardBg,
     paddingHorizontal: 20,

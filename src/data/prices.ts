@@ -86,8 +86,8 @@ export const PRICES: Record<string, PriceInfo> = {
   // ═══════════════════════════════════════
 
   'move-in-clean': {
-    price: '별도 견적',
-    priceNote: '평수·청소 범위에 따라 상이 — 전화 상담 후 확정',
+    price: '평당 9,900원~',
+    priceNote: '청소 범위에 따라 상이 — 전화 상담 후 확정',
   },
   'packing-move': {
     price: '별도 견적',

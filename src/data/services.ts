@@ -394,12 +394,13 @@ export const SERVICES: Service[] = [
   // ─────────────────────────────────────────
   {
     id: 'move-in-clean',
-    name: '입주청소',
+    name: '클리토피아 입주청소',
     category: '홈클리닝',
-    keywords: ['입주청소', '입주', '이사청소', '새집', '청소'],
+    keywords: ['입주청소', '입주', '이사청소', '새집', '청소', '클리토피아'],
     ...PRICES['move-in-clean'],
     duration: '별도 협의',
     phone: PHONE,
+    isPopular: true,
     highlights: [
       '주방·욕실·거실 등 전 공간 전문 클리닝',
       '입주 전 새집 먼지·잔여 오염물 완전 제거',
@@ -472,6 +473,7 @@ export const SERVICES: Service[] = [
     ...PRICES['water-pipe-clean'],
     duration: '약 1~2시간',
     phone: PHONE,
+    isPopular: true,
     highlights: [
       '수도 배관 내 녹·이물질·세균 완전 제거',
       '수질 개선 및 물 냄새·색 해결',
@@ -739,6 +741,7 @@ export const SERVICES: Service[] = [
     id: 'blacksten-screen',
     name: '블랙스텐 미세촘촘 방충망 교체',
     category: '윈도우ALL케어',
+    isPopular: true,
     quotationUrl: 'https://kobang.netlify.app/',
     keywords: ['블랙스텐', '방충망', '미세방충망', '촘촘', '먼지차단', '창문'],
     ...PRICES['blacksten-screen'],
@@ -812,7 +815,18 @@ export const SERVICES: Service[] = [
   },
 ];
 
-export const POPULAR_SERVICES = SERVICES.filter((s) => s.isPopular);
+// 인기 서비스 순서 고정 (1~6위)
+const POPULAR_IDS = [
+  'aircon-wall',       // 1위
+  'aircon-stand',      // 2위
+  'washer-top',        // 3위
+  'blacksten-screen',  // 4위
+  'water-pipe-clean',  // 5위
+  'move-in-clean',     // 6위
+];
+export const POPULAR_SERVICES = POPULAR_IDS
+  .map((id) => SERVICES.find((s) => s.id === id))
+  .filter(Boolean) as typeof SERVICES;
 
 export function getServiceById(id: string): Service | undefined {
   return SERVICES.find((s) => s.id === id);
