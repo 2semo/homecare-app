@@ -33,16 +33,16 @@ export default function CategoryTab({ selected, onSelect }: Props) {
           <Pressable
             key={tab.value}
             style={({ pressed }) => [
-              styles.tab,
-              active && styles.tabActive,
-              pressed && !active && styles.tabPressed,
+              styles.chip,
+              active && styles.chipActive,
+              pressed && !active && styles.chipPressed,
             ]}
             onPress={() => onSelect(tab.value)}
             accessibilityLabel={`${tab.label} 카테고리`}
             accessibilityRole="tab"
             accessibilityState={{ selected: active }}
           >
-            <Text style={[styles.tabText, active && styles.tabTextActive]}>
+            <Text style={[styles.chipText, active && styles.chipTextActive]}>
               {tab.label}
             </Text>
           </Pressable>
@@ -55,30 +55,35 @@ export default function CategoryTab({ selected, onSelect }: Props) {
 const styles = StyleSheet.create({
   scroll: {
     flexShrink: 0,
+    backgroundColor: Colors.cardBg,
   },
   content: {
-    paddingHorizontal: 16,
-    paddingVertical: 12,
+    paddingHorizontal: 20,
+    paddingVertical: 16,
     gap: 8,
   },
-  tab: {
-    backgroundColor: Colors.sectionBg,
-    borderRadius: 20,
+  chip: {
+    backgroundColor: Colors.cardBg,
+    borderRadius: 9999,
     paddingHorizontal: 16,
-    paddingVertical: 8,
+    paddingVertical: 9,
+    borderWidth: 1,
+    borderColor: Colors.border,
   },
-  tabActive: {
-    backgroundColor: Colors.primary,
+  chipActive: {
+    backgroundColor: Colors.textPrimary,
+    borderColor: Colors.textPrimary,
   },
-  tabPressed: {
+  chipPressed: {
     opacity: 0.7,
   },
-  tabText: {
-    fontSize: 14,
+  chipText: {
+    fontSize: 13,
     fontWeight: '500',
-    color: Colors.textSecondary,
+    color: Colors.textPrimary,
+    letterSpacing: -0.3,
   },
-  tabTextActive: {
+  chipTextActive: {
     color: '#FFFFFF',
   },
 });

@@ -1,0 +1,26 @@
+{
+  "hooks": {
+    "Stop": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if [ ! -f package.json ]; then exit 0; fi; npm run lint 2>&1 && npm run build 2>&1 && npm run test 2>&1"
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "INPUT=$(cat); COMMAND=$(echo \"$INPUT\" | python3 -c \"import json,sys; d=json.load(sys.stdin); print(d.get('tool_input',{}).get('command',''))\" 2>/dev/null || echo \"\"); if echo \"$COMMAND\" | grep -qE 'rm\\s+-rf|git\\s+push\\s+--force|git\\s+reset\\s+--hard|DROP\\s+TABLE'; then echo \"BLOCKED: 위험한 명령어가 감지되었습니다: $COMMAND\" >&2; exit 2; fi"
+          }
+        ]
+      }
+    ]
+  }
+}

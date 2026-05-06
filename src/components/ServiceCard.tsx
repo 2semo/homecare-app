@@ -16,93 +16,82 @@ export default function ServiceCard({ service, onPress }: Props) {
       accessibilityLabel={`${service.name}, ${service.price}`}
       accessibilityRole="button"
     >
-      <View style={styles.iconBox}>
-        <MaterialCommunityIcons
-          name={service.iconName as any}
-          size={24}
-          color={Colors.primary}
-        />
-      </View>
-
-      <View style={styles.info}>
-        <Text style={styles.name} numberOfLines={2}>
-          {service.name}
-        </Text>
-        <Text style={styles.meta}>
-          {service.category} · {service.duration}
-        </Text>
-        <Text style={styles.price}>{service.price}</Text>
-      </View>
-
       {service.isPopular && (
         <View style={styles.popularBadge}>
           <Text style={styles.popularText}>인기</Text>
         </View>
       )}
+      <View style={styles.iconBox}>
+        <MaterialCommunityIcons
+          name={service.iconName as any}
+          size={22}
+          color={Colors.primary}
+        />
+      </View>
+      <Text style={styles.name} numberOfLines={2}>
+        {service.name}
+      </Text>
+      <Text style={styles.price}>{service.price}</Text>
     </Pressable>
   );
 }
 
 const styles = StyleSheet.create({
   card: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: Colors.cardBg,
-    borderRadius: 12,
-    borderWidth: 1,
-    borderColor: Colors.border,
+    flex: 1,
+    backgroundColor: Colors.sectionBg,
+    borderRadius: 18,
     padding: 16,
-    marginBottom: 10,
-    shadowColor: '#000',
-    shadowOpacity: 0.05,
-    shadowRadius: 4,
-    shadowOffset: { width: 0, height: 1 },
-    elevation: 1,
+    paddingBottom: 14,
+    marginBottom: 12,
+    position: 'relative',
   },
   pressed: {
-    opacity: 0.7,
-  },
-  iconBox: {
-    width: 48,
-    height: 48,
-    borderRadius: 10,
-    backgroundColor: Colors.primaryBadgeBg,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginRight: 14,
-    flexShrink: 0,
-  },
-  info: {
-    flex: 1,
-  },
-  name: {
-    fontSize: 16,
-    fontWeight: '600',
-    color: Colors.textPrimary,
-    marginBottom: 3,
-  },
-  meta: {
-    fontSize: 12,
-    color: Colors.textSecondary,
-    marginBottom: 4,
-  },
-  price: {
-    fontSize: 14,
-    fontWeight: '700',
-    color: Colors.primary,
+    opacity: 0.75,
+    transform: [{ scale: 0.97 }],
   },
   popularBadge: {
     position: 'absolute',
     top: 10,
     right: 10,
     backgroundColor: Colors.popularBadge,
-    borderRadius: 6,
-    paddingHorizontal: 8,
+    borderRadius: 9999,
+    paddingHorizontal: 7,
     paddingVertical: 3,
+    zIndex: 1,
   },
   popularText: {
-    fontSize: 11,
-    fontWeight: '600',
+    fontSize: 10,
+    fontWeight: '700',
     color: '#FFFFFF',
+    letterSpacing: 0.3,
+  },
+  iconBox: {
+    width: 44,
+    height: 44,
+    borderRadius: 12,
+    backgroundColor: '#FFFFFF',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 32,
+    shadowColor: '#000',
+    shadowOpacity: 0.04,
+    shadowRadius: 2,
+    shadowOffset: { width: 0, height: 1 },
+    elevation: 1,
+  },
+  name: {
+    fontSize: 15,
+    fontWeight: '600',
+    color: Colors.textPrimary,
+    letterSpacing: -0.4,
+    marginBottom: 4,
+    lineHeight: 20,
+  },
+  price: {
+    fontSize: 12,
+    fontWeight: '600',
+    color: Colors.primary,
+    letterSpacing: -0.2,
   },
 });

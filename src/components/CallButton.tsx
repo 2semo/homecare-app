@@ -22,7 +22,9 @@ export default function CallButton({ onPress, disabled = false, serviceName }: P
       accessibilityRole="button"
     >
       <View style={styles.inner}>
-        <MaterialCommunityIcons name="phone" size={20} color="#FFFFFF" style={styles.icon} />
+        <View style={styles.ring}>
+          <MaterialCommunityIcons name="phone" size={16} color="#FFFFFF" />
+        </View>
         <Text style={styles.text}>문의하기</Text>
       </View>
     </Pressable>
@@ -32,12 +34,19 @@ export default function CallButton({ onPress, disabled = false, serviceName }: P
 const styles = StyleSheet.create({
   button: {
     backgroundColor: Colors.primary,
-    borderRadius: 12,
+    borderRadius: 9999,
     marginHorizontal: 16,
     paddingVertical: 16,
+    shadowColor: Colors.primary,
+    shadowOpacity: 0.35,
+    shadowRadius: 14,
+    shadowOffset: { width: 0, height: 8 },
+    elevation: 6,
   },
   disabled: {
     backgroundColor: Colors.ctaDisabled,
+    shadowOpacity: 0,
+    elevation: 0,
   },
   pressed: {
     opacity: 0.85,
@@ -46,13 +55,20 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
+    gap: 8,
   },
-  icon: {
-    marginRight: 8,
+  ring: {
+    width: 24,
+    height: 24,
+    borderRadius: 12,
+    backgroundColor: 'rgba(255,255,255,0.18)',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   text: {
-    fontSize: 17,
+    fontSize: 15,
     fontWeight: '600',
     color: '#FFFFFF',
+    letterSpacing: -0.3,
   },
 });

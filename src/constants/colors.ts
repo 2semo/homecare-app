@@ -1,28 +1,32 @@
 export const Colors = {
   // 배경
-  pageBg: '#F7F8FA',
+  pageBg: '#F2F2F4',
   cardBg: '#FFFFFF',
-  sectionBg: '#F0F1F4',
+  sectionBg: '#F5F5F7',
 
   // 브랜드
-  primary: '#0064D2',
-  primaryBadgeBg: '#E8F1FB',
-  primaryBadgeText: '#0064D2',
+  primary: '#0066CC',
+  primaryFaint: 'rgba(0, 102, 204, 0.08)',
+  primaryBadgeBg: 'rgba(0, 102, 204, 0.08)',
+  primaryBadgeText: '#0066CC',
+  lotteRed: '#ED1C24',
 
   // 텍스트
-  textPrimary: '#1A1A1A',
-  textBody: '#444444',
-  textSecondary: '#777777',
+  textPrimary: '#1D1D1F',
+  textBody: '#1D1D1F',
+  textSecondary: '#7A7A7A',
   textDisabled: '#AAAAAA',
 
   // 시맨틱
-  popularBadge: '#FF6B35',
-  border: '#E5E7EB',
+  popularBadge: '#ED1C24',
+  border: '#E0E0E0',
+  borderCard: 'rgba(0, 0, 0, 0.08)',
+  dividerSoft: '#F0F0F0',
   overlay: 'rgba(0,0,0,0.5)',
   ctaDisabled: '#AAAAAA',
 
   // 탭 바
-  tabActive: '#0064D2',
+  tabActive: '#0066CC',
   tabInactive: '#AAAAAA',
 
   // 보증 (안심케어)
