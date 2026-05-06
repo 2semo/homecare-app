@@ -7,8 +7,8 @@ const TABS: { label: string; value: CategoryFilter }[] = [
   { label: '전체', value: 'all' },
   { label: '가전 클리닝', value: '가전클리닝' },
   { label: '홈 클리닝', value: '홈클리닝' },
-  { label: '이전·설치', value: '이전설치' },
   { label: '윈도우ALL케어', value: '윈도우ALL케어' },
+  { label: '이전·설치', value: '이전설치' },
 ];
 
 interface Props {
