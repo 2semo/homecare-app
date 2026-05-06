@@ -69,12 +69,10 @@ export default function HomeScreen() {
         </View>
         <Text style={styles.heroTitle}>{'믿을 수 있는\n홈케어, 동네에서.'}</Text>
         <Text style={styles.heroSub}>
-          에어컨부터 입주청소·시공까지. 롯데하이마트 안산선부점에서 직접 관리하는 홈케어 서비스입니다.
+          {'에어컨청소부터 입주청소·방충망시공까지.\n롯데하이마트 안산선부점에서\n직접 관리하는 홈케어 서비스입니다.'}
         </Text>
         <View style={styles.heroMeta}>
-          <Text style={styles.heroMetaText}>평일 10–20시</Text>
-          <Text style={styles.heroMetaDot}>·</Text>
-          <Text style={styles.heroMetaText}>주말 10–19시</Text>
+          <Text style={styles.heroMetaText}>평일·주말 10–20시</Text>
           <Text style={styles.heroMetaDot}>·</Text>
           <Text style={styles.heroMetaText}>당일 견적</Text>
         </View>
