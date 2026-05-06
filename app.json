@@ -1,0 +1,33 @@
+{
+  "expo": {
+    "name": "홈케어",
+    "slug": "homecare-app",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "scheme": "homecare",
+    "splash": {
+      "backgroundColor": "#0064D2",
+      "resizeMode": "contain"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "com.homecare.customer"
+    },
+    "android": {
+      "package": "com.homecare.customer",
+      "adaptiveIcon": {
+        "backgroundColor": "#0064D2"
+      }
+    },
+    "plugins": [
+      "expo-router",
+      "expo-asset"
+    ],
+    "experiments": {
+      "typedRoutes": true
+    }
+  }
+}
